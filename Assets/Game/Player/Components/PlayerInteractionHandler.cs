@@ -10,6 +10,11 @@ public class PlayerInteractionHandler : MonoBehaviour
 
     public Player Player { get; private set; }
 
+    void Awake()
+    {
+        Player = GetComponent<Player>();
+    }
+
     void Update()
     {
         Camera mainCamera = Camera.main;

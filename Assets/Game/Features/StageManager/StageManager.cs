@@ -26,6 +26,7 @@ public class StageManager : MonoBehaviour
         {
             ExitStage();
         }
+        
         currentStage = newStage;
         if (!currentStage)
         {
@@ -46,11 +47,14 @@ public class StageManager : MonoBehaviour
         }
 
         currentStage.OnEnter();
-
-        if (!immediate)
+        
+        if (immediate)
         {
-            StartCameraTransition();
+            FinishCameraTransition();
+            return;
         }
+
+        StartCameraTransition();
     }
 
     private void StartCameraTransition()
@@ -105,11 +109,6 @@ public class StageManager : MonoBehaviour
                 prop.enabled = false;
             }
         }
-
-        // Disable current stage camera
-        Camera stageCamera = currentStage.StageCamera;
-        stageCamera.enabled = false;
-        stageCamera.tag = "Untagged";
 
         currentStage.OnExit();
         currentStage = null;
