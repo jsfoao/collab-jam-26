@@ -12,6 +12,7 @@ GameObject:
   - component: {fileID: 7315475224422414507}
   - component: {fileID: 8723900425603656986}
   - component: {fileID: 3205061317724259873}
+  - component: {fileID: 1528634686391009869}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -74,4 +75,16 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrabHandler
   stiffness: 20
-  damping: 2
+  damping: 5.73
+--- !u!114 &1528634686391009869
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598136719055968591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cb9532be311667d4cb57eb1a070e4cc9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory

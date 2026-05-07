@@ -71,10 +71,9 @@ public class Item : MonoBehaviour, IInteractable, ILinkable
 
     public void OnInteract(PlayerInteractionHandler interactionHandler)
     {
-        Debug.Log("Interacted with item");
-
-        Player player = interactionHandler.Player;
-        player.ItemHandler.Grab(this);
+        Debug.Log("Add to inventory");
+        PlayerInventory playerInventory = interactionHandler.GetComponent<PlayerInventory>();
+        playerInventory.AddItemToInventory(this);
     }
 
     public void OnFocus(PlayerInteractionHandler interactionHandler)
