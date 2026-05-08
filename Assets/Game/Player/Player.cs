@@ -3,17 +3,32 @@ using UnityEngine;
 
 public class Player : MonoBehaviour
 {   
+    [SerializeField] private new Camera camera;
+    public Camera Camera => camera;
+
     public PlayerItemHandler ItemHandler { get; private set; }
     public PlayerInteractionHandler InteractionHandler { get; private set; }
+
+    [SerializeField] private PlayerCursorUI cursorPrefab;
+    public PlayerCursorUI Cursor { get; private set; }
 
     void Awake()
     {
         ItemHandler = GetComponent<PlayerItemHandler>();
         InteractionHandler = GetComponent<PlayerInteractionHandler>();
+        Camera.SetupCurrent(camera);
     }
 
     void Start()
     {
+        // Spawn cursor
+        if (cursorPrefab)
+        {
+            GameManager gameManager = GameManager.Instance;
+            Cursor = Instantiate(cursorPrefab, transform);
+            Cursor.transform.SetParent(gameManager.Canvas.transform, false);
+        }
+
         SetupInput();
     }
 
@@ -31,6 +46,6 @@ public class Player : MonoBehaviour
     private void OnInteractInputCanceled()
     {
         ItemHandler.TryLink();
-        ItemHandler.Drop();    
+        ItemHandler.Drop();
     }
 }

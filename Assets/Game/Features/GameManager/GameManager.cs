@@ -14,6 +14,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private StageManager stageManager;
     public StageManager StageManager => stageManager;
 
+    [SerializeField] private Canvas canvas;
+    public Canvas Canvas => canvas;
+
     private void Awake()
     {
         if (Instance != null && Instance != this)

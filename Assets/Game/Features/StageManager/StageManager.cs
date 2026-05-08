@@ -1,19 +1,20 @@
 using System.Collections;
 using UnityEngine;
+using System;
 
 public class StageManager : MonoBehaviour
 {
-    [SerializeField] private new Camera camera;
-    public Camera Camera => camera;
-
     [SerializeField] private Stage initialStage;
-
     [SerializeField] private float transitionDuration = 1f;
 
     private Stage currentStage;
+    [NonSerialized] public Stage lastSelectedStage;
+
+    public bool IsTransitioning { get; private set; }
 
     void Start()
     {
+        // Enter initial stage immediately if set
         if (initialStage)
         {
             EnterStage(initialStage, true);
@@ -33,42 +34,38 @@ public class StageManager : MonoBehaviour
             return;
         }
 
-        // Setup stage camera
-        Camera stageCamera = currentStage.StageCamera;
-        stageCamera.enabled = true;
-        stageCamera.tag = "MainCamera";
-
-        foreach (StageProp prop in currentStage.stageProps)
-        {
-            if (prop)
-            {
-                prop.enabled = true;
-            }
-        }
-
         currentStage.OnEnter();
         
         if (immediate)
         {
-            FinishCameraTransition();
+            FinishPlayerTransition();
             return;
         }
 
-        StartCameraTransition();
+        StartPlayerTransition();
     }
 
-    private void StartCameraTransition()
+    private void StartPlayerTransition()
     {
-        StartCoroutine(AnimateCameraTransition());
+        if (IsTransitioning)
+        {
+            return;
+        }
+
+        IsTransitioning = true;
+        StartCoroutine(AnimatePlayerTransition());
     }
 
-    private IEnumerator AnimateCameraTransition()
+    private IEnumerator AnimatePlayerTransition()
     {
-        Quaternion startRotation = camera.transform.rotation;
-        Quaternion endRotation = currentStage.StageCamera.transform.rotation;
+        Player player = GameManager.Instance.Player;
+        Vector3 startPosition = player.transform.position;
+        Quaternion startRotation = player.transform.rotation;
 
-        Vector3 startPosition = camera.transform.position;
-        Vector3 endPosition = currentStage.StageCamera.transform.position;
+        Camera stageCamera = currentStage.StageCamera;
+        Quaternion endRotation = stageCamera.transform.rotation;
+        Vector3 endPosition = stageCamera.transform.position;
+        
         float elapsedTime = 0f;
 
         while (elapsedTime < transitionDuration)
@@ -76,26 +73,44 @@ public class StageManager : MonoBehaviour
             float t = elapsedTime / transitionDuration;
 
             // Update rotation
-            camera.transform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
+            player.transform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
 
             // Update position
-            camera.transform.position = Vector3.Lerp(startPosition, endPosition, t);
+            player.transform.position = Vector3.Lerp(startPosition, endPosition, t);
 
 
             elapsedTime += Time.deltaTime;
             yield return null;
         }
 
-        FinishCameraTransition();
+        FinishPlayerTransition();
     }
 
-    private void FinishCameraTransition()
+    private void FinishPlayerTransition()
     {
-        camera.transform.rotation = currentStage.StageCamera.transform.rotation;
-        camera.transform.position = currentStage.StageCamera.transform.position;
+        Camera stageCamera = currentStage.StageCamera;
+        Player player = GameManager.Instance.Player;
+        player.transform.rotation = stageCamera.transform.rotation;
+        player.transform.position = stageCamera.transform.position;
+        IsTransitioning = false;
+
+        SetPropsEnabled(true);
     }
 
     public void ExitStage()
+    {
+        if (!currentStage)
+        {
+            return;
+        }
+
+        SetPropsEnabled(false);
+
+        currentStage.OnExit();
+        currentStage = null;
+    }
+
+    private void SetPropsEnabled(bool enabled)
     {
         if (!currentStage)
         {
@@ -106,11 +121,8 @@ public class StageManager : MonoBehaviour
         {
             if (prop)
             {
-                prop.enabled = false;
+                prop.enabled = enabled;
             }
         }
-
-        currentStage.OnExit();
-        currentStage = null;
     }
 }

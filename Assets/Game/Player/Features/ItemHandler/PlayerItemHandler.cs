@@ -5,6 +5,7 @@ public class PlayerItemHandler : MonoBehaviour
 {
     [SerializeField] public float stiffness = 100f;
     [SerializeField] public float damping = 10f;
+    [SerializeField] public float grabDistance = 2f;
     
     private Item currentItem;
     public Item CurrentItem => currentItem;
@@ -37,7 +38,7 @@ public class PlayerItemHandler : MonoBehaviour
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
         Collider collider = currentItem.GetComponent<Collider>();
         float radius = Mathf.Max(collider.bounds.extents.x, collider.bounds.extents.y, collider.bounds.extents.z);
-        Vector3 targetPos = ray.GetPoint(1f);
+        Vector3 targetPos = ray.GetPoint(grabDistance);
 
         RaycastHit[] hits = Physics.SphereCastAll(ray.origin, radius, ray.direction, Mathf.Infinity, LayerMask.GetMask("Default"));
         foreach (RaycastHit hit in hits)
@@ -126,5 +127,10 @@ public class PlayerItemHandler : MonoBehaviour
             return false;
         }
         return link.LinkTo(otherLink);
+    }
+
+    public bool IsGrabbing()
+    {
+        return currentItem != null;
     }
 }

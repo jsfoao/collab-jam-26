@@ -25,7 +25,6 @@ public class Item : MonoBehaviour, IInteractable, ILinkable
     {
         foreach (Link link in Link.links)
         {
-            Debug.Log($"Linked to {link.gameObject.name}");
             Debug.DrawLine(transform.position, link.transform.position, Color.green, 0f, false);
         }
     }
@@ -40,11 +39,13 @@ public class Item : MonoBehaviour, IInteractable, ILinkable
     public virtual void OnGrab(PlayerItemHandler itemHandler)
     {
         currentHandler = itemHandler;
+        Interactable.enabled = false;
     }
 
     public virtual void OnDrop(PlayerItemHandler itemHandler)
     {
         currentHandler = null;
+        Interactable.enabled = true;
     }
 
     // --- ILinkable ---
@@ -71,9 +72,12 @@ public class Item : MonoBehaviour, IInteractable, ILinkable
 
     public void OnInteract(PlayerInteractionHandler interactionHandler)
     {
-        Debug.Log("Add to inventory");
-        PlayerInventory playerInventory = interactionHandler.GetComponent<PlayerInventory>();
-        playerInventory.AddItemToInventory(this);
+        // Debug.Log("Add to inventory");
+        // PlayerInventory playerInventory = interactionHandler.GetComponent<PlayerInventory>();
+        // playerInventory.AddItemToInventory(this);
+
+        PlayerItemHandler itemHandler = interactionHandler.Player.ItemHandler;
+        itemHandler.Grab(this);
     }
 
     public void OnFocus(PlayerInteractionHandler interactionHandler)

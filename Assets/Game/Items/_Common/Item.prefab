@@ -89,6 +89,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d19ec903b74793b43b1805c5496606a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  cursorTexture: {fileID: 2800000, guid: 095c3d62f765b3c45bc1376c4e7532bd, type: 3}
+  cursorSize: {x: 32, y: 32}
 --- !u!114 &-5578663425833740279
 MonoBehaviour:
   m_ObjectHideFlags: 0

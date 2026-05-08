@@ -29,6 +29,10 @@ public class Link : MonoBehaviour, ILinkable
             return false;
         }
         OnLink(otherLink);
+        if (otherLink)
+        {
+            otherLink.OnLink(this);
+        }
         return true;
     }
 
@@ -43,6 +47,10 @@ public class Link : MonoBehaviour, ILinkable
             return false;
         }
         OnUnLink(otherLink);
+        if (otherLink)
+        {
+            otherLink.OnUnLink(this);
+        }
         return true;
     }
 

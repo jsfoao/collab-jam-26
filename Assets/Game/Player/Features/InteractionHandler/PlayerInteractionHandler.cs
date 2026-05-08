@@ -1,4 +1,5 @@
 using Input;
+using UnityEditor;
 using UnityEngine;
 
 public class PlayerInteractionHandler : MonoBehaviour
@@ -17,30 +18,59 @@ public class PlayerInteractionHandler : MonoBehaviour
 
     void Update()
     {
-        Camera mainCamera = Camera.main;
-        if (!mainCamera)
+        UpdateFocus();
+    }
+
+    private void UpdateFocus()
+    {
+        Camera playerCamera = Player.Camera;
+        if (!playerCamera)
         {
             UnFocus();
             return;
         }
 
         Vector3 mousePosition = InputRegistry.Player.Mouse.action.ReadValue<Vector2>();
-        Ray ray = mainCamera.ScreenPointToRay(mousePosition);
+        Ray ray = playerCamera.ScreenPointToRay(mousePosition);
 
-        if (Physics.Raycast(ray, out RaycastHit hit, Mathf.Infinity, layerMask))
+        RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, layerMask);
+
+        Interactable interactableToFocus = null;
+        foreach (RaycastHit hit in hits)
         {
+            // Check if it's valid interactable
             Interactable interactable = hit.collider.GetComponent<Interactable>();
             if (!interactable)
             {
-                UnFocus();
-                return;
+                continue;
             }
             if (!CanInteract(interactable))
             {
-                UnFocus();
-                return;
+                continue;
             }
-            Focus(interactable);
+            
+            // Check for occlusion
+            RaycastHit occlusionHit;
+            Physics.Raycast(ray, out occlusionHit, Mathf.Infinity, layerMask);
+            Interactable occlusionInteractable = occlusionHit.collider.GetComponent<Interactable>();
+            if (occlusionHit.collider)
+            {
+                if (!occlusionInteractable)
+                {
+                    if (occlusionHit.collider != hit.collider)
+                    {
+                        continue;
+                    }
+                }
+            }
+            
+            interactableToFocus = interactable;
+            break;
+        }
+
+        if (interactableToFocus)
+        {
+            Focus(interactableToFocus);
         }
         else
         {
@@ -65,6 +95,11 @@ public class PlayerInteractionHandler : MonoBehaviour
             return false;
         }
         if (!interactable.CanInteract(this))
+        {
+            return false;
+        }
+
+        if (Player.ItemHandler.IsGrabbing())
         {
             return false;
         }
@@ -108,6 +143,25 @@ public class PlayerInteractionHandler : MonoBehaviour
         {
             focusedInteractable.OnUnFocus(this);
             focusedInteractable = null;
+        }
+    }
+
+    void OnDrawGizmos()
+    {
+        if (focusedInteractable)
+        {
+            Gizmos.color = Color.yellow;
+            Collider collider = focusedInteractable.GetComponent<Collider>();
+            if (collider)
+            {
+                string text = focusedInteractable.name;
+                GUIStyle style = new GUIStyle();
+                style.normal.textColor = Color.yellow;
+                style.fontSize = 14;
+                style.alignment = TextAnchor.MiddleCenter;
+                Handles.Label(focusedInteractable.transform.position + Vector3.up * 0.2f, text, style);
+                Gizmos.DrawWireCube(collider.bounds.center, collider.bounds.size + Vector3.one * 0.2f);
+            }
         }
     }
 }

@@ -44,3 +44,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 98602101c32a93749ac18f375533937e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageManager
+  initialStage: {fileID: 0}
+  transitionDuration: 0.8

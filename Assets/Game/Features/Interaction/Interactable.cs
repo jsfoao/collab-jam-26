@@ -12,6 +12,9 @@ public interface IInteractable
 
 public class Interactable : MonoBehaviour, IInteractable
 {
+    [SerializeField] private Texture2D cursorTexture;
+    [SerializeField] private Vector2 cursorSize = new Vector2(32f, 32f);
+
     public List<IInteractable> contexts = new List<IInteractable>();
 
     public virtual bool CanInteract(PlayerInteractionHandler interactionHandler)
@@ -42,26 +45,38 @@ public class Interactable : MonoBehaviour, IInteractable
                 context.OnInteract(interactionHandler);
             }
         }
-        Debug.Log($"Interacted with {gameObject.name}");
     }
 
     public virtual void OnFocus(PlayerInteractionHandler interactionHandler)
     {
+        // Set cursor texture
+        if (cursorTexture)
+        {
+            Player player = interactionHandler.Player;
+            PlayerCursorUI cursor = player.Cursor;
+            cursor.SetCursorSize(cursorSize);
+            cursor.SetCursorTexture(cursorTexture);
+        }
+
         foreach (IInteractable context in contexts)
         {
             context.OnFocus(interactionHandler);
         }
-
-        Debug.Log($"Focused on {gameObject.name}");
     }
 
     public virtual void OnUnFocus(PlayerInteractionHandler interactionHandler)
     {
+        // Clear cursor texture
+        if (cursorTexture)
+        {
+            Player player = interactionHandler.Player;
+            PlayerCursorUI cursor = player.Cursor;
+            cursor.ClearCursorTexture();
+        }
+
         foreach (IInteractable context in contexts)
         {
             context.OnUnFocus(interactionHandler);
         }
-
-        Debug.Log($"Unfocused from {gameObject.name}");
     }
 }
