@@ -77,7 +77,7 @@ public class StageSelector : MonoBehaviour, IInteractable
     {
         if (stage)
         {
-            Gizmos.color = Color.white.WithAlpha(0.3f);
+            Gizmos.color = Color.red.WithAlpha(0.8f);
             Vector3 position = stage.GetGizmoLabelPosition();
 
             Gizmos.DrawLine(transform.position, position);
