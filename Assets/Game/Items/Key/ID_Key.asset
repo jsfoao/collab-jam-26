@@ -9,8 +9,8 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f51753d088778545ae2db81741e034a, type: 3}
-  m_Name: Item_Sphere
-  m_EditorClassIdentifier: Assembly-CSharp::ItemData
-  displayName: Sphere
+  m_Script: {fileID: 11500000, guid: fdef51a958b9e0443abcd5e90cc90bf5, type: 3}
+  m_Name: ID_Key
+  m_EditorClassIdentifier: Assembly-CSharp::GameplayObjectID
+  displayName: Key
   icon: {fileID: 0}

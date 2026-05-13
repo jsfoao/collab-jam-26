@@ -9,10 +9,19 @@ public interface ILinkable
     public void OnUnLink(Link otherLink);
 }
 
+[RequireComponent(typeof(GameplayID))]
 public class Link : MonoBehaviour, ILinkable
 {
     [NonSerialized] public List<ILinkable> contexts = new List<ILinkable>();
     [NonSerialized] public List<Link> links = new List<Link>();
+
+    // List of valid gameplay object IDs that can be linked with this link. If empty, any gameplay object ID is valid.
+    [SerializeField] public List<GameplayObjectID> validObjects = new List<GameplayObjectID>();
+
+    // If maxLinks is 0, there is no limit to the number of links that can be made with this link
+    [SerializeField] public int maxLinks = 1;
+
+    public GameplayObjectID ID => GetID();
 
     public bool LinkTo(Link otherLink)
     {
@@ -24,7 +33,7 @@ public class Link : MonoBehaviour, ILinkable
         {
             return false;
         }
-        if (!CanLink(otherLink) && !otherLink.CanLink(this))
+        if (!CanLink(otherLink) || !otherLink.CanLink(this))
         {
             return false;
         }
@@ -66,6 +75,36 @@ public class Link : MonoBehaviour, ILinkable
         {
             return false;
         }
+        if (links.Count >= maxLinks && maxLinks > 0)
+        {
+            return false;
+        }
+
+        // Evaluate if gameplay ID is valid
+        GameplayID gameplayID = GetComponent<GameplayID>();
+        if (!ID)
+        {
+            return false;
+        }
+
+        // Evaluate if other gameplay ID is valid
+        if (!otherLink.ID)
+        {
+            return false;
+        }
+
+        if (validObjects.Count == 0 && otherLink.validObjects.Count == 0)
+        {
+            return false;
+        }
+        
+        // Evaluate if other gameplay ID is valid for this link
+        if (!validObjects.Contains(otherLink.ID) && !otherLink.validObjects.Contains(ID))
+        {
+            return false;
+        }
+
+        // Evaluate contexts
         if (contexts.Count > 0)
         {
             foreach (ILinkable context in contexts)
@@ -99,5 +138,16 @@ public class Link : MonoBehaviour, ILinkable
             context.OnUnLink(otherLink);
         }
         links.Remove(otherLink);
+    }
+
+    // Return gameplay ID
+    private GameplayObjectID GetID()
+    {
+        GameplayID gameplayID = GetComponent<GameplayID>();
+        if (gameplayID)
+        {
+            return gameplayID.ID;
+        }
+        return null;
     }
 }

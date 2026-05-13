@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 7960264061429901901}
   - component: {fileID: 3863048497371756864}
   - component: {fileID: 8454598024616307038}
+  - component: {fileID: 5886478005395495188}
   m_Layer: 0
   m_Name: Lock
   m_TagString: Untagged
@@ -246,6 +247,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79548aa72c037c244980a1ab5bebf2d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Link
+  validObjects:
+  - {fileID: 11400000, guid: 2cd8979360576364fb9e8cb02907aa4a, type: 2}
 --- !u!114 &8454598024616307038
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -260,6 +263,19 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::Interactable
   cursorTexture: {fileID: 2800000, guid: 095c3d62f765b3c45bc1376c4e7532bd, type: 3}
   cursorSize: {x: 32, y: 32}
+--- !u!114 &5886478005395495188
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1721455690706721681}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc697c9f9e6dea24ab09082f3fa7a13d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameplayID
+  ID: {fileID: 11400000, guid: 46917d980c4dc38468245e7cf3a9a2e0, type: 2}
 --- !u!1 &6094891011518120769
 GameObject:
   m_ObjectHideFlags: 0

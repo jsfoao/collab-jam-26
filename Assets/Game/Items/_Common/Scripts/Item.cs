@@ -2,9 +2,6 @@ using UnityEngine;
 
 public class Item : MonoBehaviour, IInteractable, ILinkable
 {
-    [SerializeField] private ItemData itemData;
-    public ItemData ItemData => itemData;
-    
     private PlayerItemHandler currentHandler;
     public PlayerItemHandler CurrentHandler => currentHandler;
 

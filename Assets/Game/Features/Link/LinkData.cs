@@ -1,8 +1,9 @@
 using UnityEngine;
 
 
-[CreateAssetMenu(fileName = "Link_", menuName = "Game/Link")]
-public class LinkData : ScriptableObject
+[CreateAssetMenu(fileName = "ID_", menuName = "Game/Gameplay ID")]
+public class GameplayObjectID : ScriptableObject
 {
-    public string displayName;
+    [SerializeField] public string displayName;
+    [SerializeField] public Sprite icon;
 }
