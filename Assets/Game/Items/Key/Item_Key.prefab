@@ -24,17 +24,25 @@ PrefabInstance:
       propertyPath: m_Name
       value: Item_Key
       objectReference: {fileID: 0}
+    - target: {fileID: 4433454634452622616, guid: 079dd3d34e55b57499c2e7ed7f75b166, type: 3}
+      propertyPath: 'm_Materials.Array.data[0]'
+      value: 
+      objectReference: {fileID: 2100000, guid: 384c5abb46864154bb490a717c9b0bb8, type: 2}
+    - target: {fileID: 4814050708526141730, guid: 079dd3d34e55b57499c2e7ed7f75b166, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: -8602939383064019894, guid: e04b18e253935314cad559491d9f64c2, type: 3}
     - target: {fileID: 7491345294242979042, guid: 079dd3d34e55b57499c2e7ed7f75b166, type: 3}
       propertyPath: m_LocalScale.x
-      value: 0.2
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7491345294242979042, guid: 079dd3d34e55b57499c2e7ed7f75b166, type: 3}
       propertyPath: m_LocalScale.y
-      value: 0.2
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7491345294242979042, guid: 079dd3d34e55b57499c2e7ed7f75b166, type: 3}
       propertyPath: m_LocalScale.z
-      value: 0.2
+      value: 7
       objectReference: {fileID: 0}
     - target: {fileID: 7491345294242979042, guid: 079dd3d34e55b57499c2e7ed7f75b166, type: 3}
       propertyPath: m_ConstrainProportionsScale
@@ -128,5 +136,5 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.2, y: 0.2, z: 0.2}
-  m_Center: {x: 0, y: 0, z: 0}
+  m_Size: {x: 0.25074384, y: 0.07631746, z: 0.02}
+  m_Center: {x: 0.007935539, y: -0.0018412694, z: 0}

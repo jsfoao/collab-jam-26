@@ -17,6 +17,8 @@ public class Interactable : MonoBehaviour, IInteractable
 
     public List<IInteractable> contexts = new List<IInteractable>();
 
+    public Action<PlayerInteractionHandler> interacted;
+
     public virtual bool CanInteract(PlayerInteractionHandler interactionHandler)
     {
         if (!enabled)
@@ -45,6 +47,7 @@ public class Interactable : MonoBehaviour, IInteractable
                 context.OnInteract(interactionHandler);
             }
         }
+        interacted?.Invoke(interactionHandler);
     }
 
     public virtual void OnFocus(PlayerInteractionHandler interactionHandler)

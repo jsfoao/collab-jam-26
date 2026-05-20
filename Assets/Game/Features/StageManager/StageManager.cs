@@ -8,6 +8,7 @@ public class StageManager : MonoBehaviour
     [SerializeField] private float transitionDuration = 1f;
 
     private Stage currentStage;
+    public Stage CurrentStage => currentStage;
     [NonSerialized] public Stage lastSelectedStage;
 
     public bool IsTransitioning { get; private set; }

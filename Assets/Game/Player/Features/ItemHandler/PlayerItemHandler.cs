@@ -12,6 +12,7 @@ public class PlayerItemHandler : MonoBehaviour
 
     public Player Player { get; private set; }
 
+    public Vector3 TargetPosition => targetPosition;
     private Vector3 targetPosition;
 
     void Awake()
@@ -21,29 +22,24 @@ public class PlayerItemHandler : MonoBehaviour
 
     void Update()
     {
-        if (!currentItem)
-        {
-            return;
-        }
-
-        // Move item with damped spring force
-        Rigidbody rb = currentItem.GetComponent<Rigidbody>();
-        if (!rb)
-        {
-            return;
-        }
-
         // Update target position
         Vector3 mousePosition = InputRegistry.Player.Mouse.action.ReadValue<Vector2>();
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-        Collider collider = currentItem.GetComponent<Collider>();
-        float radius = Mathf.Max(collider.bounds.extents.x, collider.bounds.extents.y, collider.bounds.extents.z);
+
+        Collider collider = null;
+        float radius = 1f;
+        if (currentItem)
+        {
+            collider = currentItem.GetComponent<Collider>();
+            radius = Mathf.Max(collider.bounds.extents.x, collider.bounds.extents.y, collider.bounds.extents.z);
+        }
+        
         Vector3 targetPos = ray.GetPoint(grabDistance);
 
         RaycastHit[] hits = Physics.SphereCastAll(ray.origin, radius, ray.direction, Mathf.Infinity, LayerMask.GetMask("Default"));
         foreach (RaycastHit hit in hits)
         {
-            if (hit.collider == collider)
+            if (hit.collider && hit.collider == collider)
             {
                 continue;
             }
@@ -55,6 +51,17 @@ public class PlayerItemHandler : MonoBehaviour
             targetPos = ray.origin + ray.direction * hit.distance - ray.direction * radius;
         }
         SetTargetPosition(targetPos);
+
+        // Move item with damped spring force
+        if (!currentItem)
+        {
+            return;
+        }
+        Rigidbody rb = currentItem.GetComponent<Rigidbody>();
+        if (!rb)
+        {
+            return;
+        }
 
         // Update spring force
         Vector3 direction = targetPosition - currentItem.transform.position;
@@ -69,6 +76,10 @@ public class PlayerItemHandler : MonoBehaviour
 
     public bool Grab(Item item)
     {
+        if (currentItem == item)
+        {
+            return false;
+        }
         if (!item)
         {
             return false;

@@ -20,10 +20,6 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
-    - target: {fileID: 4433454634452622616, guid: 079dd3d34e55b57499c2e7ed7f75b166, type: 3}
-      propertyPath: 'm_Materials.Array.data[0]'
-      value: 
-      objectReference: {fileID: 2100000, guid: dbf199dd44b9361418eb74bffb139b03, type: 2}
     - target: {fileID: 7491345294242979042, guid: 079dd3d34e55b57499c2e7ed7f75b166, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.2
@@ -90,9 +86,6 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 1043513713723407758, guid: 079dd3d34e55b57499c2e7ed7f75b166, type: 3}
       insertIndex: -1
       addedObject: {fileID: 4703610353049555855}
-    - targetCorrespondingSourceObject: {fileID: 1043513713723407758, guid: 079dd3d34e55b57499c2e7ed7f75b166, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 853193505835367908}
   m_SourcePrefab: {fileID: 100100000, guid: 079dd3d34e55b57499c2e7ed7f75b166, type: 3}
 --- !u!1 &2634460292324592136 stripped
 GameObject:
@@ -132,17 +125,3 @@ BoxCollider:
   serializedVersion: 3
   m_Size: {x: 0.2, y: 0.2, z: 0.2}
   m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &853193505835367908
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2634460292324592136}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9f91082b4dd00844e932ad803659cbf8, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Destructible
-  health: 100
-  damagerPerHit: 10

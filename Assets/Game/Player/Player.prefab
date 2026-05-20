@@ -79,6 +79,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::GrabHandler
   stiffness: 20
   damping: 5.73
+  grabDistance: 2
 --- !u!114 &1528634686391009869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -91,8 +92,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: cb9532be311667d4cb57eb1a070e4cc9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::PlayerInventory
-  maxInventorySlots: 10
+  maxInventorySlots: 8
   inventoryItems: []
+  inventoryUIPrefab: {fileID: 3361820207363946061, guid: e6e8826fa18030d4fb139fa2763f60a8, type: 3}
 --- !u!1 &6329616911463198718
 GameObject:
   m_ObjectHideFlags: 0

@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 6333966919361607556}
   - component: {fileID: -5578663425833740279}
   - component: {fileID: 870739575409214111}
+  - component: {fileID: 7631451953493067878}
   m_Layer: 0
   m_Name: Item
   m_TagString: Untagged
@@ -76,7 +77,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a366edebb594fe46872843ff03cea96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Item
-  itemData: {fileID: 0}
+  meshRenderer: {fileID: 4433454634452622616}
+  workbenchMode: 0
 --- !u!114 &6333966919361607556
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -103,7 +105,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 79548aa72c037c244980a1ab5bebf2d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Link
-  validLinks: []
+  validObjects: []
+  maxLinks: 1
 --- !u!114 &870739575409214111
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -120,6 +123,19 @@ MonoBehaviour:
   - {fileID: 6333966919361607556}
   - {fileID: 0}
   - {fileID: 0}
+--- !u!114 &7631451953493067878
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1043513713723407758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: bc697c9f9e6dea24ab09082f3fa7a13d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::GameplayID
+  ID: {fileID: 0}
 --- !u!1 &8967524951407788081
 GameObject:
   m_ObjectHideFlags: 0
@@ -186,7 +202,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: b38f2427433c722499cf286bc3587aaa, type: 2}
+  - {fileID: 2100000, guid: 82f7f591af636dd4b870e6d11577bada, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

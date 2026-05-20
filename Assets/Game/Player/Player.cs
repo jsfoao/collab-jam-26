@@ -8,6 +8,7 @@ public class Player : MonoBehaviour
 
     public PlayerItemHandler ItemHandler { get; private set; }
     public PlayerInteractionHandler InteractionHandler { get; private set; }
+    public PlayerInventory Inventory { get; private set; }
 
     [SerializeField] private PlayerCursorUI cursorPrefab;
     public PlayerCursorUI Cursor { get; private set; }
@@ -16,6 +17,7 @@ public class Player : MonoBehaviour
     {
         ItemHandler = GetComponent<PlayerItemHandler>();
         InteractionHandler = GetComponent<PlayerInteractionHandler>();
+        Inventory = GetComponent<PlayerInventory>();
         Camera.SetupCurrent(camera);
     }
 

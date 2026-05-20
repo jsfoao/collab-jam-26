@@ -1,6 +1,7 @@
 using Input;
 using UnityEditor;
 using UnityEngine;
+using UnityEngine.EventSystems;
 
 public class PlayerInteractionHandler : MonoBehaviour
 {
@@ -99,10 +100,22 @@ public class PlayerInteractionHandler : MonoBehaviour
             return false;
         }
 
+        // Disable interaction if player is currently grabbing an item
         if (Player.ItemHandler.IsGrabbing())
         {
             return false;
         }
+
+        // Disable interaction if pointer is over UI
+        EventSystem eventSystem = EventSystem.current;
+        if (eventSystem != null)
+        {
+            if (eventSystem.IsPointerOverGameObject())
+            {
+                return false;
+            }
+        }
+
         return enabled;
     }
 
