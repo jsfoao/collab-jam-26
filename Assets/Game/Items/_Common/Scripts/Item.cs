@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.VFX;
 
 public class Item : MonoBehaviour, IInteractable, ILinkable
 {
@@ -11,6 +12,9 @@ public class Item : MonoBehaviour, IInteractable, ILinkable
     [SerializeField] public MeshRenderer meshRenderer;
 
     [SerializeField] bool displayItem = false;
+
+    [Header("VFX")]
+    [SerializeField] private VisualEffect hitVFX;
 
     void Awake()
     {
@@ -97,6 +101,18 @@ public class Item : MonoBehaviour, IInteractable, ILinkable
     {
         currentHandler = null;
         Interactable.enabled = true;
+    }
+
+    void OnCollisionEnter(Collision collision)
+    {
+        if (!hitVFX)
+        {
+            return;
+        }
+        Quaternion rotation = Quaternion.LookRotation(collision.contacts[0].normal);
+        Vector3 position = collision.contacts[0].point;
+        VisualEffect hitVFXInstance = Instantiate(hitVFX, position, rotation);
+        Destroy(hitVFXInstance.gameObject, 0.4f);
     }
 
     // --- ILinkable ---

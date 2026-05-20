@@ -78,7 +78,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Item
   meshRenderer: {fileID: 4433454634452622616}
-  workbenchMode: 0
+  displayItem: 0
+  hitVFX: {fileID: 988353260365563924, guid: ab134e678e27e0f41a82a92402b2ca51, type: 3}
 --- !u!114 &6333966919361607556
 MonoBehaviour:
   m_ObjectHideFlags: 0
