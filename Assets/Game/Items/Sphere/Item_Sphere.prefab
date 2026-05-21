@@ -24,6 +24,22 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
+    - target: {fileID: 5504618888714079115, guid: 079dd3d34e55b57499c2e7ed7f75b166, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 0.30784
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504618888714079115, guid: 079dd3d34e55b57499c2e7ed7f75b166, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 0.30784
+      objectReference: {fileID: 0}
+    - target: {fileID: 5504618888714079115, guid: 079dd3d34e55b57499c2e7ed7f75b166, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 0.30784
+      objectReference: {fileID: 0}
+    - target: {fileID: 6405169921013374062, guid: 079dd3d34e55b57499c2e7ed7f75b166, type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 10207, guid: 0000000000000000e000000000000000, type: 0}
     - target: {fileID: 7491345294242979042, guid: 079dd3d34e55b57499c2e7ed7f75b166, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.3

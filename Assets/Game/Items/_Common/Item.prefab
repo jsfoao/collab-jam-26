@@ -11,7 +11,6 @@ GameObject:
   - component: {fileID: 8276493457769063118}
   - component: {fileID: 4611253286205686781}
   - component: {fileID: 1882890730818357899}
-  - component: {fileID: 6333966919361607556}
   - component: {fileID: -5578663425833740279}
   - component: {fileID: 870739575409214111}
   - component: {fileID: 7631451953493067878}
@@ -36,6 +35,7 @@ Transform:
   m_ConstrainProportionsScale: 1
   m_Children:
   - {fileID: 7491345294242979042}
+  - {fileID: 5504618888714079115}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!54 &4611253286205686781
@@ -77,23 +77,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a366edebb594fe46872843ff03cea96, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::Item
+  Interactable: {fileID: 8807293943500985634}
+  Collider: {fileID: 6405169921013374062}
   meshRenderer: {fileID: 4433454634452622616}
-  displayItem: 0
   hitVFX: {fileID: 988353260365563924, guid: ab134e678e27e0f41a82a92402b2ca51, type: 3}
---- !u!114 &6333966919361607556
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1043513713723407758}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d19ec903b74793b43b1805c5496606a7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: Assembly-CSharp::Interactable
-  cursorTexture: {fileID: 2800000, guid: 095c3d62f765b3c45bc1376c4e7532bd, type: 3}
-  cursorSize: {x: 32, y: 32}
+  displayItem: 0
 --- !u!114 &-5578663425833740279
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -121,7 +109,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageProp
   components:
-  - {fileID: 6333966919361607556}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
 --- !u!114 &7631451953493067878
@@ -137,6 +125,75 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GameplayID
   ID: {fileID: 0}
+--- !u!1 &5997947161324999181
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 5504618888714079115}
+  - component: {fileID: 6405169921013374062}
+  - component: {fileID: 8807293943500985634}
+  m_Layer: 0
+  m_Name: Collision
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &5504618888714079115
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997947161324999181}
+  serializedVersion: 2
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.2, y: 0.2, z: 0.2}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8276493457769063118}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!64 &6405169921013374062
+MeshCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997947161324999181}
+  m_Material: {fileID: 0}
+  m_IncludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_ExcludeLayers:
+    serializedVersion: 2
+    m_Bits: 0
+  m_LayerOverridePriority: 0
+  m_IsTrigger: 0
+  m_ProvidesContacts: 0
+  m_Enabled: 1
+  serializedVersion: 5
+  m_Convex: 1
+  m_CookingOptions: 30
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!114 &8807293943500985634
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5997947161324999181}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d19ec903b74793b43b1805c5496606a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::Interactable
+  cursorTexture: {fileID: 2800000, guid: 095c3d62f765b3c45bc1376c4e7532bd, type: 3}
+  cursorSize: {x: 32, y: 32}
 --- !u!1 &8967524951407788081
 GameObject:
   m_ObjectHideFlags: 0

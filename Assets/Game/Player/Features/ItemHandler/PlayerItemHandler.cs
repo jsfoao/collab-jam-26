@@ -30,7 +30,7 @@ public class PlayerItemHandler : MonoBehaviour
         float radius = 1f;
         if (currentItem)
         {
-            collider = currentItem.GetComponent<Collider>();
+            collider = currentItem.Collider;
             radius = Mathf.Max(collider.bounds.extents.x, collider.bounds.extents.y, collider.bounds.extents.z);
         }
         

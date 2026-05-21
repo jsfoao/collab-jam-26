@@ -3,22 +3,22 @@ using UnityEngine.VFX;
 
 public class Item : MonoBehaviour, IInteractable, ILinkable
 {
-    private PlayerItemHandler currentHandler;
-    public PlayerItemHandler CurrentHandler => currentHandler;
-
-    public Interactable Interactable { get; private set; }
-    public Link Link { get; private set; }
-
+    [Header("Components")]
+    [SerializeField] public Interactable Interactable;
+    [SerializeField] public Collider Collider;
     [SerializeField] public MeshRenderer meshRenderer;
-
-    [SerializeField] bool displayItem = false;
 
     [Header("VFX")]
     [SerializeField] private VisualEffect hitVFX;
 
+    private PlayerItemHandler currentHandler;
+    public PlayerItemHandler CurrentHandler => currentHandler;
+
+    public Link Link { get; private set; }
+
+
     void Awake()
     {
-        Interactable = GetComponent<Interactable>();
         Interactable.contexts.Add(this);
 
         Link = GetComponent<Link>();
@@ -28,10 +28,6 @@ public class Item : MonoBehaviour, IInteractable, ILinkable
 
     void Update()
     {
-        if (displayItem)
-        {
-            transform.Rotate(Vector3.up, 40f * Time.deltaTime);
-        }
         UpdateGlowMaterial();
 
         foreach (Link link in Link.links)
@@ -71,16 +67,10 @@ public class Item : MonoBehaviour, IInteractable, ILinkable
         {
             return;
         }
-        if (displayItem)
-        {
-            material.SetFloat("_Glow", 0.0f);
-            return;
-        }
 
         bool hasItem = playerInventory.HasItem(this);
         float glowValue = hasItem ? 0.0f : 1.0f;
         material.SetFloat("_Glow", glowValue);
-
     }
 
 
@@ -95,12 +85,22 @@ public class Item : MonoBehaviour, IInteractable, ILinkable
     {
         currentHandler = itemHandler;
         Interactable.enabled = false;
+        Link.enabled = true;
     }
 
     public virtual void OnDrop(PlayerItemHandler itemHandler)
     {
         currentHandler = null;
         Interactable.enabled = true;
+        Link.enabled = false;
+
+        // GameManager gameManager = GameManager.Instance;
+        // StageManager stageManager = gameManager.StageManager;
+        // Stage currentStage = stageManager.CurrentStage;
+        // if (currentStage.gameObject.name != "Stage_Workbench")
+        // {
+        //     gameObject.SetActive(false);
+        // }
     }
 
     void OnCollisionEnter(Collision collision)
@@ -119,7 +119,7 @@ public class Item : MonoBehaviour, IInteractable, ILinkable
 
     public virtual bool CanLink(Link otherLink)
     {
-        return enabled;
+        return true;
     }
 
     public virtual void OnLink(Link otherLink)

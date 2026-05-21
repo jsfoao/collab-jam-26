@@ -1,17 +1,15 @@
-using System.Collections;
 using UnityEngine;
 
 public class Door : MonoBehaviour, ILinkable, IInteractable
 {
-    [Header("References")]
+    [Header("Components")]
     [SerializeField] private Link link;
     [SerializeField] private Interactable interactable;
+    [SerializeField] private TransformAnimator animator;
 
     [Header("Door")]
     [SerializeField] private GameObject hingePivot;
     [SerializeField] private AnimationCurve openAnimCurve;
-    [SerializeField] private float openAnimDuration = 1f;
-    [SerializeField] private bool openReverse = false;
     [SerializeField] private bool startLocked = true;
 
     public bool IsLocked { get; private set; } = true;
@@ -30,63 +28,6 @@ public class Door : MonoBehaviour, ILinkable, IInteractable
         {
             IsLocked = false;
         }
-    }
-
-    // --- Open ---
-
-    private bool CanOpen()
-    {
-        if (IsLocked)
-        {
-            return false;
-        }
-        if (!enabled)
-        {
-            return false;
-        }
-        return true;
-    }
-
-
-    public void Open()
-    {
-        if (IsOpen)
-        {
-            return;
-        }
-        if (!CanOpen())
-        {
-            return;
-        }
-        if (!hingePivot)
-        {
-            return;            
-        }
-        
-        IsOpen = true;
-        StartCoroutine(StartOpenAnim());
-    }
-
-    private IEnumerator StartOpenAnim()
-    {
-        float time = 0f;
-        while (time < openAnimDuration)
-        {
-            float angle = openAnimCurve.Evaluate(time / openAnimDuration);
-            if (openReverse)
-            {
-                angle = -angle;
-            }
-            hingePivot.transform.localRotation = Quaternion.Euler(0f, angle, 0f);
-            time += Time.deltaTime;
-            yield return null;
-        }
-
-        FinishOpenAnim();
-    }
-
-    private void FinishOpenAnim()
-    {
     }
 
     public void UnLock()
@@ -124,7 +65,8 @@ public class Door : MonoBehaviour, ILinkable, IInteractable
         {
             return;
         }
-        Open();
+        animator.StartForwardAnim();
+        interactable.enabled = false;
     }
 
     public void OnFocus(PlayerInteractionHandler interactionHandler)
@@ -145,6 +87,4 @@ public class Door : MonoBehaviour, ILinkable, IInteractable
             Gizmos.DrawSphere(hingePivot.transform.position, 0.1f);
         }
     }
-    
-
 }

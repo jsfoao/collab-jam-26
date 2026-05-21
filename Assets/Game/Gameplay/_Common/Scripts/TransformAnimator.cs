@@ -24,7 +24,6 @@ public class TransformAnimator : MonoBehaviour
     [SerializeField] private bool updateScale = false;
     [SerializeField] private AnimationCurve scaleAnimCurve;
 
-
     public bool Animating => animating;
     public bool Open => open;
     
@@ -35,56 +34,45 @@ public class TransformAnimator : MonoBehaviour
     void Start()
     {
         alpha = 0;
+        open = false;
         started = true;
     }
 
     public void StartAnim()
     {
-        if (!started)
-        {
-            return;
-        }
         if (animating)
         {
             return;
         }
         if (open)
         {
-            StartCoroutine(AnimCorountine(true));
+            StartCoroutine(AnimCoroutine(true));
         }
         else
         {
-            StartCoroutine(AnimCorountine(false));
+            StartCoroutine(AnimCoroutine(false));
         }
     }
 
     public void StartForwardAnim()
     {
-        if (!started)
-        {
-            return;
-        }
         if (animating)
         {
             return;
         }
-        StartCoroutine(AnimCorountine(false));
+        StartCoroutine(AnimCoroutine(false));
     }
 
     public void StartReverseAnim()
     {
-        if (!started)
-        {
-            return;
-        }
         if (animating)
         {
             return;
         }
-        StartCoroutine(AnimCorountine(true));
+        StartCoroutine(AnimCoroutine(true));
     }
 
-    private IEnumerator AnimCorountine(bool reverse)
+    private IEnumerator AnimCoroutine(bool reverse)
     {
         float time = 0f;
         animating = true;
@@ -114,6 +102,7 @@ public class TransformAnimator : MonoBehaviour
         animating = false;
         if (reverse)
         {
+            alpha = 0f;
             open = false;
             UpdatePosition(0f);
             UpdateRotation(0f);
@@ -121,6 +110,7 @@ public class TransformAnimator : MonoBehaviour
         }
         else
         {
+            alpha = 1f;
             UpdatePosition(1f);
             UpdateRotation(1f);
             UpdateScale(1f);
@@ -187,20 +177,45 @@ public class TransformAnimator : MonoBehaviour
         {
             return;
         }
-        Vector3 startPos = transform.position;
-        Vector3 endPos = target.position;
 
-        Gizmos.color = Color.white;
-        Gizmos.DrawLine(startPos, endPos);
+        if (updatePosition)
+        {
+            Vector3 startPos = transform.position;
+            Vector3 endPos = target.position;
 
-        Gizmos.color = Color.white;
-        Gizmos.DrawSphere(root.position, 0.05f);
+            Gizmos.color = Color.white;
+            Gizmos.DrawLine(startPos, endPos);
 
-        Gizmos.color = Color.red;
-        Gizmos.DrawSphere(startPos, 0.05f);
+            Gizmos.color = Color.white;
+            Gizmos.DrawSphere(root.position, 0.05f);
 
-        Gizmos.color = Color.green;
-        Gizmos.DrawSphere(endPos, 0.05f);
+            Gizmos.color = Color.red;
+            Gizmos.DrawSphere(startPos, 0.05f);
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawSphere(endPos, 0.05f);
+        }
+
+        if (updateRotation)
+        {
+            const float size = 0.5f;
+
+            Gizmos.color = Color.gray;
+            Gizmos.DrawWireSphere(transform.position, size);
+
+            Gizmos.color = Color.white;
+            Gizmos.DrawLine(transform.position, transform.position + root.forward * size);
+            Gizmos.DrawSphere(transform.position + root.forward * size, 0.05f);
+
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(transform.position, transform.position + transform.forward * size);
+            Gizmos.DrawSphere(transform.position + transform.forward * size, 0.05f);
+
+            Gizmos.color = Color.green;
+            Gizmos.DrawLine(transform.position, transform.position + target.forward * size);
+            Gizmos.DrawSphere(transform.position + target.forward * size, 0.05f);
+        }
+
 
         UpdatePosition(alpha);
         UpdateRotation(alpha);
