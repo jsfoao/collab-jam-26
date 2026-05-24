@@ -6,7 +6,8 @@ public class PlayerItemHandler : MonoBehaviour
     [SerializeField] public float stiffness = 100f;
     [SerializeField] public float damping = 10f;
     [SerializeField] public float grabDistance = 2f;
-    
+    [SerializeField] public LayerMask avoidanceLayerMask;
+    [SerializeField] public LayerMask linkLayerMask;
     private Item currentItem;
     public Item CurrentItem => currentItem;
 
@@ -36,20 +37,22 @@ public class PlayerItemHandler : MonoBehaviour
         
         Vector3 targetPos = ray.GetPoint(grabDistance);
 
-        RaycastHit[] hits = Physics.SphereCastAll(ray.origin, radius, ray.direction, Mathf.Infinity, LayerMask.GetMask("Default"));
+        // Avoid obstacles
+        RaycastHit[] hits = Physics.SphereCastAll(ray.origin, radius, ray.direction, Mathf.Infinity, avoidanceLayerMask);
         foreach (RaycastHit hit in hits)
         {
             if (hit.collider && hit.collider == collider)
             {
                 continue;
             }
-            Link link = hit.collider.GetComponent<Link>();
-            if (!link)
+            ItemAvoider itemAvoider = hit.collider.GetComponent<ItemAvoider>();
+            if (!itemAvoider)
             {
                 continue;
             }
-            targetPos = ray.origin + ray.direction * hit.distance - ray.direction * radius;
+            targetPos = ray.origin + ray.direction * hit.distance - ray.direction * (radius + itemAvoider.AvoidanceDistance);
         }
+
         SetTargetPosition(targetPos);
 
         // Move item with damped spring force
@@ -117,7 +120,7 @@ public class PlayerItemHandler : MonoBehaviour
         Link otherLink = null;
         Vector3 mousePosition = InputRegistry.Player.Mouse.action.ReadValue<Vector2>();
         Ray ray = Camera.main.ScreenPointToRay(mousePosition);
-        RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, LayerMask.GetMask("Default"));
+        RaycastHit[] hits = Physics.RaycastAll(ray, Mathf.Infinity, linkLayerMask);
         foreach (RaycastHit hit in hits)
         {
             Debug.Log($"Hit {hit.collider.gameObject.name}");

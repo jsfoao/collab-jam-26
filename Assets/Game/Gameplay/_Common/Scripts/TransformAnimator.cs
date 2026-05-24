@@ -27,7 +27,6 @@ public class TransformAnimator : MonoBehaviour
     public bool Animating => animating;
     public bool Open => open;
     
-    private bool started = false;
     private bool animating = false;
     private bool open = false;
 
@@ -35,7 +34,6 @@ public class TransformAnimator : MonoBehaviour
     {
         alpha = 0;
         open = false;
-        started = true;
     }
 
     public void StartAnim()

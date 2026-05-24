@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 8723900425603656986}
   - component: {fileID: 3205061317724259873}
   - component: {fileID: 1528634686391009869}
+  - component: {fileID: 2110756165865452349}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -77,9 +78,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c6d712056a717c4da0761972b02456e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::GrabHandler
-  stiffness: 20
-  damping: 5.73
+  stiffness: 100
+  damping: 10
   grabDistance: 2
+  avoidanceLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
+  linkLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
 --- !u!114 &1528634686391009869
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -95,6 +102,44 @@ MonoBehaviour:
   maxInventorySlots: 8
   inventoryItems: []
   inventoryUIPrefab: {fileID: 3361820207363946061, guid: e6e8826fa18030d4fb139fa2763f60a8, type: 3}
+--- !u!114 &2110756165865452349
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1598136719055968591}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5bd4770bd32c3ac4bb1f93aaf8fb3f94, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: Assembly-CSharp::PlayerCameraController
+  cameraRotationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 2
+      outSlope: 2
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 0
+      outSlope: 0
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  maxCameraRotation: {x: 2, y: 4}
+  cameraSpeed: 2
 --- !u!1 &6329616911463198718
 GameObject:
   m_ObjectHideFlags: 0
@@ -202,7 +247,7 @@ MonoBehaviour:
     m_Bits: 1
   m_VolumeTrigger: {fileID: 0}
   m_VolumeFrameworkUpdateModeOption: 2
-  m_RenderPostProcessing: 0
+  m_RenderPostProcessing: 1
   m_Antialiasing: 0
   m_AntialiasingQuality: 2
   m_StopNaN: 0

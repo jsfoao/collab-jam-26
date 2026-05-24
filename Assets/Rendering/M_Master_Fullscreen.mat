@@ -40,12 +40,14 @@ Material:
     - _DitherBrightness: 0.2
     - _DitherScale: 2
     - _DitherSpread: 0.8
+    - _EdgeBrightness: 0.5
     - _EdgeDepthThreshold: 0.5
     - _EdgeNormalThreshold: 2
-    - _EdgeThickness: 1
+    - _EdgeStepThreshold: 0.15
+    - _EdgeThickness: 0.6
     m_Colors:
-    - _DitherLitColor: {r: 0.41509432, g: 0.41509432, b: 0.41509432, a: 1}
-    - _DitherShadowColor: {r: 0, g: 0, b: 0, a: 1}
-    - _EdgeColor: {r: 0.7924528, g: 0.7924528, b: 0.7924528, a: 0.2}
+    - _DitherLitColor: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
+    - _DitherShadowColor: {r: 0.2264151, g: 0.09961424, b: 0.028835887, a: 1}
+    - _EdgeColor: {r: 1, g: 1, b: 1, a: 0.2}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

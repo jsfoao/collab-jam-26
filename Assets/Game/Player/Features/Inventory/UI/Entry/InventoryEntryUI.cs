@@ -11,6 +11,8 @@ public class InventoryEntryUI : MonoBehaviour
     [Header("Inventory Entry")]
     [SerializeField] private float itemRotationSpeed = 40f;
     [SerializeField] private Vector2Int renderTextureSize = new Vector2Int(80, 80);
+    [SerializeField] private float itemDisplayOffsetZ = 0.1f;
+    [SerializeField] private float itemDisplayOffsetSpeed = 1f;
 
     [System.NonSerialized] public InventoryUI inventoryUI;
     [System.NonSerialized] public int index = -1;
@@ -18,12 +20,15 @@ public class InventoryEntryUI : MonoBehaviour
     private RenderTexture renderTexture;
     private Item currentItem;
     private GameObject currentItemProxy;
+    private Vector3 attachBaseLocalPosition;
+    private bool isPointerOver;
 
     public void Initialize()
     {
         itemRenderer = Instantiate(itemRendererPrefab).GetComponent<InventoryEntryRenderer>();
         itemRenderer.transform.position = Vector3.right * index * 10f;
         itemRenderer.transform.rotation = Quaternion.identity;
+        attachBaseLocalPosition = itemRenderer.attachItem.transform.localPosition;
 
         // Create render texture
         renderTexture = new RenderTexture(renderTextureSize.x, renderTextureSize.y, 16);
@@ -36,6 +41,8 @@ public class InventoryEntryUI : MonoBehaviour
 
         InventoryEntryButton entryButton = button.GetComponent<InventoryEntryButton>();
         entryButton.onPointerDown += OnPointerDown;
+        entryButton.onPointerEnter += OnPointerEnter;
+        entryButton.onPointerExit += OnPointerExit;
 
         ClearItem();
     }
@@ -84,7 +91,27 @@ public class InventoryEntryUI : MonoBehaviour
         if (currentItem)
         {
             itemRenderer.attachItem.transform.localRotation *= Quaternion.Euler(Vector3.up * itemRotationSpeed * Time.deltaTime);
+            float localPosZ = isPointerOver ? itemDisplayOffsetZ : attachBaseLocalPosition.z;
+
+            Vector3 targetLocalPos = Vector3.forward * localPosZ;
+            Vector3 newLocalPos = Vector3.MoveTowards(itemRenderer.attachItem.transform.localPosition, targetLocalPos, Time.deltaTime * itemDisplayOffsetSpeed);
+            itemRenderer.attachItem.transform.localPosition = newLocalPos; 
         }
+        else
+        {
+            itemRenderer.attachItem.transform.localRotation = Quaternion.identity;
+            itemRenderer.attachItem.transform.localPosition = attachBaseLocalPosition;
+        }
+    }
+
+    private void OnPointerEnter()
+    {
+        isPointerOver = true;
+    }
+
+    private void OnPointerExit()
+    {
+        isPointerOver = false;
     }
 
     private void OnPointerDown()

@@ -6,6 +6,7 @@ public class StageSelector : MonoBehaviour, IInteractable
 {
     [SerializeField] private Stage stage;
     public Stage Stage => stage;
+    [SerializeField] private float transitionDuration = 1.5f;
 
      void Start()
     {
@@ -31,6 +32,7 @@ public class StageSelector : MonoBehaviour, IInteractable
     public void OnInteract(PlayerInteractionHandler interactionHandler)
     {
         StageManager stageManager = GameManager.Instance.StageManager;
+        stageManager.TransitionDuration = transitionDuration;
         stageManager.EnterStage(stage, false);
     }
 

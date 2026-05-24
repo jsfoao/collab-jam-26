@@ -83,6 +83,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: Assembly-CSharp::StageSelector
   stage: {fileID: 0}
+  transitionDuration: 1.2
 --- !u!114 &176294544593083416
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -52,6 +52,10 @@ public class PlayerInventory : MonoBehaviour
         {
             return;
         }
+        if (!inventoryItems.Contains(item)) 
+        {
+            return;
+        }
 
         // Update UI
         int index = inventoryItems.IndexOf(item);

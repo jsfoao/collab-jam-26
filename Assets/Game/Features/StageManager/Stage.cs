@@ -1,7 +1,6 @@
 using Unity.VisualScripting;
 using UnityEngine;
 using UnityEditor;
-using System;
 using System.Collections.Generic;
 
 [ExecuteAlways]
@@ -9,6 +8,7 @@ public class Stage : MonoBehaviour
 {
     public List<StageProp> stageProps = new List<StageProp>();
 
+    [Header("Components")]
     [SerializeField] private Camera stageCamera;
     public Camera StageCamera => stageCamera;
 

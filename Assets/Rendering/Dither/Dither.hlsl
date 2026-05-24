@@ -34,6 +34,7 @@ void DitherLighting_float(
 
     // Binary dither: lit or shadow
     float dither = step(threshold, adjusted);
-
-    Out = lerp(ShadowColor, LitColor, dither);
+    
+    // Out = saturate(dither * luminance);
+    Out = lerp(ShadowColor, LitColor * luminance, dither);
 }

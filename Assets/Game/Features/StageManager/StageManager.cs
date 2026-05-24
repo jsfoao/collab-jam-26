@@ -5,7 +5,9 @@ using System;
 public class StageManager : MonoBehaviour
 {
     [SerializeField] private Stage initialStage;
-    [SerializeField] private float transitionDuration = 1f;
+    
+    [SerializeField] public float TransitionDuration = 1f;
+    [SerializeField] private AnimationCurve transitionCurve = AnimationCurve.EaseInOut(0, 0, 1, 1);
 
     private Stage currentStage;
     public Stage CurrentStage => currentStage;
@@ -68,16 +70,18 @@ public class StageManager : MonoBehaviour
         Vector3 endPosition = stageCamera.transform.position;
         
         float elapsedTime = 0f;
-
-        while (elapsedTime < transitionDuration)
+        
+        float duration = TransitionDuration;
+        while (elapsedTime < duration)
         {
-            float t = elapsedTime / transitionDuration;
+            float alpha = elapsedTime / duration;
+            float curveAlpha = transitionCurve.Evaluate(alpha);
 
             // Update rotation
-            player.transform.rotation = Quaternion.Slerp(startRotation, endRotation, t);
+            player.transform.rotation = Quaternion.SlerpUnclamped(startRotation, endRotation, curveAlpha);
 
             // Update position
-            player.transform.position = Vector3.Lerp(startPosition, endPosition, t);
+            player.transform.position = Vector3.LerpUnclamped(startPosition, endPosition, curveAlpha);
 
 
             elapsedTime += Time.deltaTime;

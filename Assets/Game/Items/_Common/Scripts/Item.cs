@@ -158,4 +158,13 @@ public class Item : MonoBehaviour, IInteractable, ILinkable
     public void OnUnFocus(PlayerInteractionHandler interactionHandler)
     {
     }
+
+    void OnDestroy()
+    {
+        // Remove from inventory
+        GameManager gameManager = GameManager.Instance;
+        Player player = gameManager.Player;
+        PlayerInventory playerInventory = player.Inventory;
+        playerInventory.RemoveItemFromInventory(this);
+    }
 }

@@ -8,7 +8,7 @@ Material:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_Name: M_Pine
-  m_Shader: {fileID: -6465566751694194690, guid: e439e6de4f2c71042a36107f530eb52a, type: 3}
+  m_Shader: {fileID: -6465566751694194690, guid: 0f51e402b3dd73b48919c6405b3351ff, type: 3}
   m_Parent: {fileID: 0}
   m_ModifiedSerializedProperties: 0
   m_ValidKeywords: []
@@ -24,20 +24,8 @@ Material:
   m_SavedProperties:
     serializedVersion: 3
     m_TexEnvs:
-    - _BaseMap:
-        m_Texture: {fileID: 2800000, guid: 7ace23d4c4066f7489e601465ada98d1, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _BaseTexture:
-        m_Texture: {fileID: 2800000, guid: 2775ea0159cf6b445b5a1568d5a5162f, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
-    - _NormalMap:
-        m_Texture: {fileID: 2800000, guid: 18f92b9e1a3213c49ba34225fc7c9b3c, type: 3}
-        m_Scale: {x: 1, y: 1}
-        m_Offset: {x: 0, y: 0}
     - _Texture:
-        m_Texture: {fileID: 2800000, guid: ba3659f0abe154a498a53bb3e519b4bf, type: 3}
+        m_Texture: {fileID: 2800000, guid: 7ace23d4c4066f7489e601465ada98d1, type: 3}
         m_Scale: {x: 1, y: 1}
         m_Offset: {x: 0, y: 0}
     - unity_Lightmaps:
@@ -54,23 +42,17 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
-    - _BaseTiling: 0.5
-    - _Glow: 0
-    - _GlowFrequency: 0.5
-    - _GlowIntensity: 2
-    - _GlowSharpness: 150
-    - _GlowSpeed: 8
-    - _NormalStrength: 0
     - _QueueControl: 0
     - _QueueOffset: 0
-    - _Smoothness: 0.5
-    - _Tiling: 0.5
+    - _Smoothness: 0
+    - _WindSpeed: 6
+    - _WindStrength: 0.03
     m_Colors:
-    - _BaseColor: {r: 1, g: 1, b: 1, a: 1}
-    - _GlowColor: {r: 1, g: 1, b: 1, a: 1}
+    - _Color: {r: 0.745283, g: 0.745283, b: 0.745283, a: 1}
+    - _WindDirection: {r: 1, g: 0, b: 0.5, a: 0}
   m_BuildTextureStacks: []
   m_AllowLocking: 1
---- !u!114 &1259458973913370838
+--- !u!114 &609550156177775116
 MonoBehaviour:
   m_ObjectHideFlags: 11
   m_CorrespondingSourceObject: {fileID: 0}
