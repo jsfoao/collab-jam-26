@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="AudioFile" id="{7b8f0765-fa90-4e8e-bf68-04a9a7613f25}">
+		<property name="assetPath">
+			<value>Ambience/Wind/WIND_Storm_Blowing_Howling_06_loop_mono.wav</value>
+		</property>
+		<property name="frequencyInKHz">
+			<value>44.0999985</value>
+		</property>
+		<property name="channelCount">
+			<value>1</value>
+		</property>
+		<property name="length">
+			<value>7.5797052154195015</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{5de5f1df-b3e8-4527-8837-ae1afa2b036f}</destination>
+		</relationship>
+	</object>
+</objects>

@@ -47,7 +47,7 @@ Material:
     - _EdgeThickness: 0.6
     m_Colors:
     - _DitherLitColor: {r: 0.7169812, g: 0.7169812, b: 0.7169812, a: 1}
-    - _DitherShadowColor: {r: 0.2264151, g: 0.09961424, b: 0.028835887, a: 1}
+    - _DitherShadowColor: {r: 0.066037714, g: 0.066037714, b: 0.066037714, a: 1}
     - _EdgeColor: {r: 1, g: 1, b: 1, a: 0.2}
   m_BuildTextureStacks: []
   m_AllowLocking: 1

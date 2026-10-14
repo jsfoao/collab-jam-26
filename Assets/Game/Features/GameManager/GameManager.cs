@@ -8,6 +8,9 @@ public class GameManager : MonoBehaviour
     [SerializeField] private Player player;
     public Player Player => player;
 
+    [SerializeField] private AudioManager audioManager;
+    public AudioManager AudioManager => audioManager;
+
     [SerializeField] private InputManager inputManager;
     public InputManager InputManager => inputManager;
 

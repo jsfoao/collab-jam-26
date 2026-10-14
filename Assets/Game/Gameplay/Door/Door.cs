@@ -1,3 +1,6 @@
+using System.Collections;
+using FMOD.Studio;
+using FMODUnity;
 using UnityEngine;
 
 public class Door : MonoBehaviour, ILinkable, IInteractable
@@ -12,8 +15,16 @@ public class Door : MonoBehaviour, ILinkable, IInteractable
     [SerializeField] private AnimationCurve openAnimCurve;
     [SerializeField] private bool startLocked = true;
 
+    [Header("Audio")]
+    [SerializeField] private EventReference unlockSound;
+
     public bool IsLocked { get; private set; } = true;
     public bool IsOpen { get; private set; } = false;
+
+    EventReference soundToPlay;
+
+    StudioEventEmitter eventEmitter;
+
 
     void Awake()
     {
@@ -33,6 +44,7 @@ public class Door : MonoBehaviour, ILinkable, IInteractable
     public void UnLock()
     {
         IsLocked = false;
+        RuntimeManager.PlayOneShot(unlockSound);
     }
 
     // --- ILinkable ---
@@ -66,7 +78,31 @@ public class Door : MonoBehaviour, ILinkable, IInteractable
             return;
         }
         animator.StartForwardAnim();
+        StartCoroutine(AudioCoroutine());
         interactable.enabled = false;
+    }
+
+    IEnumerator AudioCoroutine()
+    {
+        float lowFreq = 0f;
+        float duration = 1f;
+        float targetLowFreq = 1f;
+        AudioManager audioManager = AudioManager.Instance;
+        if (!audioManager)
+        {
+            yield break;
+        }
+        float time = 0f;
+        while (time < duration)
+        {
+            time += Time.deltaTime;
+            float alpha = time / duration;
+            lowFreq = Mathf.Lerp(0f, targetLowFreq, alpha);
+            audioManager.ambienceEmitter.EventInstance.setParameterByName("LowFreq", lowFreq);
+            yield return null;
+        }
+        audioManager.ambienceEmitter.EventInstance.setParameterByName("LowFreq", targetLowFreq);
+        yield return null;
     }
 
     public void OnFocus(PlayerInteractionHandler interactionHandler)

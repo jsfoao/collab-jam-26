@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<objects serializationModel="Studio.02.03.00">
+	<object class="EncodableAsset" id="{60ba4395-c98b-4972-89a2-35de9050ad13}">
+		<property name="assetPath">
+			<value>Ambience/Creak/</value>
+		</property>
+		<relationship name="masterAssetFolder">
+			<destination>{5de5f1df-b3e8-4527-8837-ae1afa2b036f}</destination>
+		</relationship>
+	</object>
+</objects>

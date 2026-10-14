@@ -99,6 +99,13 @@ MonoBehaviour:
     m_PostInfinity: 2
     m_RotationOrder: 4
   startLocked: 1
+  unlockSound:
+    Guid:
+      Data1: -1589659538
+      Data2: 1337358014
+      Data3: -780910204
+      Data4: -396109374
+    Path: event:/Gameplay/Door/Door_Unlock
 --- !u!1 &1195638797039769770
 GameObject:
   m_ObjectHideFlags: 0
@@ -145,6 +152,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TransformAnimator
   root: {fileID: 4332146964351704247}
   target: {fileID: 7599281327829156568}
+  forwardSound:
+    Guid:
+      Data1: -1978900244
+      Data2: 1211511661
+      Data3: 231396536
+      Data4: 176335963
+    Path: event:/Gameplay/Door/Door_Open
+  reverseSound:
+    Guid:
+      Data1: 0
+      Data2: 0
+      Data3: 0
+      Data4: 0
+    Path: 
   duration: 2
   alpha: 0
   updatePosition: 0

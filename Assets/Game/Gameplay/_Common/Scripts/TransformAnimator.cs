@@ -1,4 +1,5 @@
 using System.Collections;
+using FMODUnity;
 using UnityEngine;
 
 public class TransformAnimator : MonoBehaviour
@@ -7,6 +8,9 @@ public class TransformAnimator : MonoBehaviour
     [SerializeField] private Transform root;
     [SerializeField] private Transform target;
 
+    [Header("Audio")]
+    [SerializeField] private EventReference forwardSound;
+    [SerializeField] private EventReference reverseSound;
 
     [Header("Animator")]
     [SerializeField] private float duration = 1f;
@@ -44,11 +48,11 @@ public class TransformAnimator : MonoBehaviour
         }
         if (open)
         {
-            StartCoroutine(AnimCoroutine(true));
+            StartReverseAnim();
         }
         else
         {
-            StartCoroutine(AnimCoroutine(false));
+            StartForwardAnim();
         }
     }
 
@@ -58,6 +62,15 @@ public class TransformAnimator : MonoBehaviour
         {
             return;
         }
+
+        // Play forward sound
+        AudioManager audioManager = AudioManager.Instance;
+        if (audioManager != null)
+        {
+            audioManager.PlayOneShot(forwardSound, transform.position);
+        }
+
+
         StartCoroutine(AnimCoroutine(false));
     }
 
@@ -67,6 +80,14 @@ public class TransformAnimator : MonoBehaviour
         {
             return;
         }
+
+        // Play reverse sound
+        AudioManager audioManager = AudioManager.Instance;
+        if (audioManager != null)
+        {
+            audioManager.PlayOneShot(reverseSound, transform.position);
+        }
+
         StartCoroutine(AnimCoroutine(true));
     }
 

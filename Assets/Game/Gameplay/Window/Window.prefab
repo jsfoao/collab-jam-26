@@ -64,6 +64,20 @@ MonoBehaviour:
   m_EditorClassIdentifier: Assembly-CSharp::TransformAnimator
   root: {fileID: 695055363003303184}
   target: {fileID: 5982776940264851707}
+  forwardSound:
+    Guid:
+      Data1: -1973185618
+      Data2: 1204964211
+      Data3: -1423056489
+      Data4: 27235676
+    Path: event:/Gameplay/Drawer/Drawer_Open
+  reverseSound:
+    Guid:
+      Data1: -1318748512
+      Data2: 1187491345
+      Data3: -1859037562
+      Data4: -885751155
+    Path: event:/Gameplay/Drawer/Drawer_Close
   duration: 0.5
   alpha: 0
   updatePosition: 1
